@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 // routes
 import workerRoutes from "./routes/workerRoutes.js";
 
-
 dotenv.config();
 const app = express();
 
@@ -36,6 +35,19 @@ app.use(cors(corsConfig));
 
 // ===================== Endpoints =======================
 app.use("/workers", workerRoutes);
+app.get("/", (req, res) => {
+  res.send(`
+    get all workers
+    https://server-express-vs-route.vercel.app/workers
+    
+    get width id
+    https://server-express-vs-route.vercel.app/workers/1
+    
+    get width query params
+    http://localhost:5050/workers?id=5
+    https://server-express-vs-route.vercel.app/workers
+  `);
+});
 
 const PORT = process.env.PORT || 5050;
 app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
