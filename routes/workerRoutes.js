@@ -12,9 +12,7 @@ router.route("/").get((req, res) => {
         permission: worker.permission,
       });
     } else {
-      res.json({
-        permission: true,
-      });
+      res.status(404).send("404");
     }
   } else {
     res.json(allWorkers);
@@ -22,7 +20,7 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/:id").get((req, res) => {
-  console.log("req.params.id", req.params.id);
+  console.log("req.params.id ->", req.params.id);
   const worker = allWorkers.find((el) => {
     return +el.id === +req.params.id;
   });
@@ -31,9 +29,7 @@ router.route("/:id").get((req, res) => {
       permission: worker.permission,
     });
   } else {
-    res.json({
-      permission: true,
-    });
+    res.status(404).send("404");
   }
 });
 
